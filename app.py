@@ -12,8 +12,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
     'sqlite:///' + os.path.join(basedir, 'quiz.db')
 )
 uri = app.config['SQLALCHEMY_DATABASE_URI']
-if uri and uri.startswith('postgres://'):
-    app.config['SQLALCHEMY_DATABASE_URI'] = uri.replace('postgres://', 'postgresql://', 1)
+if uri:
+    # Corrige URL do tipo postgres:// para postgresql:// (necessário para SQLAlchemy)
+    if uri.startswith('postgres://'):
+        uri = uri.replace('postgres://', 'postgresql://', 1)
+    # Garante que o driver psycopg seja usado explicitamente se for PostgreSQL
+    if uri.startswith('postgresql://') and '+' not in uri.split('://')[1].split('/')[0]:
+        uri = uri.replace('postgresql://', 'postgresql+psycopg://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
