@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Quiz Bíblico - Início{% endblock %}
+{% block content %}
+<main class="tela-inicio">
+    <h1>📖 Quiz Bíblico</h1>
+    <p class="sub">100 perguntas sobre 1 Coríntios 12, Lucas 1 e a Bíblia.</p>
+    <p class="aviso">⚠️ Se você errar uma pergunta, o jogo acaba e você aparece no placar!</p>
+    <a href="{{ url_for('quiz') }}" class="btn btn-primary btn-grande">Começar Quiz</a>
+</main>
+{% endblock %}

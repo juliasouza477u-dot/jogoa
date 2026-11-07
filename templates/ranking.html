@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Placar{% endblock %}
+{% block content %}
+<main class="tela-ranking">
+    <h1>🏆 Placar</h1>
+    {% if tops %}
+        <ol class="lista-placar">
+            {% for p in tops %}
+                <li><span class="posicao">{{ loop.index }}.</span> <strong>{{ p.nome }}</strong> — {{ p.pontuacao }} ponto{{ 's' if p.pontuacao != 1 else '' }}</li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p class="vazio">Ainda não há pontuações no placar. Seja o primeiro!</p>
+    {% endif %}
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-grande">Voltar ao Início</a>
+</main>
+{% endblock %}

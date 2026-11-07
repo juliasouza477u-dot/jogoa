@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Fim de Jogo{% endblock %}
+{% block content %}
+<main class="tela-gameover">
+    <h1>💀 Você errou!</h1>
+    <p class="msg">Sua jornada terminou aqui.</p>
+    <p class="pontuacao-final">Pontuação final: <strong>{{ pontuacao }}</strong></p>
+    <form method="POST" action="{{ url_for('salvar') }}" class="form-nome">
+        <label for="nome">Digite seu nome para o placar:</label>
+        <input type="text" id="nome" name="nome" maxlength="50" placeholder="Seu nome" required autofocus>
+        <input type="hidden" name="pontuacao" value="{{ pontuacao }}">
+        <button type="submit" class="btn btn-primary btn-grande">Salvar no Placar</button>
+    </form>
+    <a href="{{ url_for('ranking') }}" class="btn btn-outline btn-grande">Ver Placar</a>
+    <a href="{{ url_for('index') }}" class="btn btn-outline btn-grande">Jogar Novamente</a>
+</main>
+{% endblock %}

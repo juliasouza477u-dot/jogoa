@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Pergunta {{ indice }} de {{ total }}{% endblock %}
+{% block content %}
+<main class="tela-quiz">
+    <div class="barra-progresso">
+        <span>Pergunta <strong>{{ indice }}</strong> de <strong>{{ total }}</strong></span>
+        <span class="pontuacao">Pontuação: <strong>{{ pontuacao }}</strong></span>
+    </div>
+    <div class="card-pergunta">
+        <p class="enunciado">{{ pergunta.enunciado }}</p>
+        <form method="POST" action="{{ url_for('responder') }}" class="form-opcoes">
+            <button type="submit" name="resposta" value="A" class="opcao">A. {{ pergunta.opcao_a }}</button>
+            <button type="submit" name="resposta" value="B" class="opcao">B. {{ pergunta.opcao_b }}</button>
+            <button type="submit" name="resposta" value="C" class="opcao">C. {{ pergunta.opcao_c }}</button>
+            <button type="submit" name="resposta" value="D" class="opcao">D. {{ pergunta.opcao_d }}</button>
+        </form>
+    </div>
+    <p class="ref">{{ pergunta.referencia }}</p>
+</main>
+{% endblock %}
